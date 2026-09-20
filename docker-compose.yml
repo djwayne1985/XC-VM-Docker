@@ -1,0 +1,38 @@
+services:
+  xc-vm:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: xc-vm
+    restart: unless-stopped
+    environment:
+      # true: check latest GitHub release and update if changed at each start
+      # false: only install once into the persistent volume
+      UPDATE_ON_START: "${UPDATE_ON_START:-false}"
+
+      # External MariaDB credentials (change this before production use)
+      MYSQL_REMOTE_USER: "${MYSQL_REMOTE_USER:-xcvm_admin}"
+      MYSQL_REMOTE_PASSWORD: "${MYSQL_REMOTE_PASSWORD:-ChangeMeNow123!}"
+
+      # Panel admin reset on startup
+      PANEL_RESET_ON_START: "${PANEL_RESET_ON_START:-true}"
+      PANEL_ADMIN_USERNAME: "${PANEL_ADMIN_USERNAME:-admin@Fladnag2018}"
+      PANEL_ADMIN_PASSWORD: "${PANEL_ADMIN_PASSWORD:-AdminPass123!}"
+
+      # Replace this with your actual runtime command if XC_VM starts a service
+      START_COMMAND: "${START_COMMAND:-sleep infinity}"
+    ports:
+      - "80"
+      - "443"
+      - "3306"
+    volumes:
+      # Persistent install metadata/version marker
+      - xc_vm_state:/var/lib/xc_vm
+      # Persistent MariaDB data directory
+      - xc_vm_mysql:/var/lib/mysql
+
+volumes:
+  xc_vm_state:
+  xc_vm_mysql:
