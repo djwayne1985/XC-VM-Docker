@@ -10,7 +10,7 @@ The stack reads settings from `.env` in this folder.
 | `MYSQL_REMOTE_USER` | `xcvm_admin` | External MariaDB account created by entrypoint. |
 | `MYSQL_REMOTE_PASSWORD` | `ChangeMeNow123!` | Password for external MariaDB account. |
 | `PANEL_RESET_ON_START` | `true` | Reapply panel admin credentials from `.env` during startup. |
-| `PANEL_ADMIN_USERNAME` | `admin@Fladnag2018` | Panel admin username to enforce. |
+| `PANEL_ADMIN_USERNAME` | `admin2026` | Panel admin username to enforce. |
 | `PANEL_ADMIN_PASSWORD` | `AdminPass123!` | Panel admin password to enforce. |
 | `START_COMMAND` | `sleep infinity` | Container keepalive command after startup routines. |
 
